@@ -42,8 +42,13 @@ A step-by-step series of examples that tell you how to get a development environ
      ```
    - Install the required Python packages:
      ```bash
-     conda install --file requirements.txt
+     pip install -r requirements.txt
      ```
+   - Download the SpaCy English language model:
+     ```bash
+     python -m spacy download en_core_web_sm
+     ```
+ 
 
 3. Install Node modules for the React front end:
    ```bash
