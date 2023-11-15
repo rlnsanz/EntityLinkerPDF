@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import PDFList from './components/PDFList';
-import PDFViewer from './components/PDFViewer';
-import EntityList from './components/EntityList';
-import EntityDetails from './components/EntityDetails';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import './styles/App.css';
+import PDFList from './PDFList';
+import PDFViewer from './PDFViewer';
+import EntityList from './EntityList';
+import EntityDetails from './EntityDetails';
+import Header from './Header';
+import Footer from './Footer';
 
 function App() {
   const [selectedPDF, setSelectedPDF] = useState(null);
