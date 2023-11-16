@@ -61,7 +61,8 @@ A step-by-step series of examples that tell you how to get a development environ
 
    - Start the Flask server:
      ```bash
-     python server/app.py
+     cd server
+     flask run
      ```
 
    - In a new terminal, start the React front end:
