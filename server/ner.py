@@ -1,6 +1,5 @@
 import spacy
 
-# Load the SpaCy model
 nlp = spacy.load("en_core_web_sm")
 
 def perform_ner(pdf_text):
@@ -16,4 +15,3 @@ def perform_ner(pdf_text):
     doc = nlp(pdf_text)
     entities = [(ent.text, ent.label_) for ent in doc.ents]
     return entities
-
