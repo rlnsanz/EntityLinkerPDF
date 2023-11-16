@@ -29,10 +29,13 @@ function PDFList({ onSelect }) {
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append('pdf', file);
+      formData.append('file', file, file.name); // Change 'pdf' to 'file'
 
       fetch('/api/upload-pdf', {
         method: 'POST',
+        headers: {
+          'Accept': 'application/pdf',
+        },
         body: formData,
       })
         .then(response => {
