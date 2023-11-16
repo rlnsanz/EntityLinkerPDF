@@ -35,14 +35,26 @@ def serve(path):
         return send_from_directory(app.static_folder, 'index.html')
 
 # Endpoint to upload PDFs
-@app.route('/upload', methods=['POST'])
+@app.route('/api/upload-pdf', methods=['POST'])
 def upload_pdf():
-    # Handle file upload and save to 'pdfs' directory
+    # Check if the post request has the file part
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
     file = request.files['file']
-    assert file.filename is not None
-    save_path = os.path.join('pdfs', file.filename)
-    file.save(save_path)
-    return jsonify({'message': 'File uploaded successfully!'})
+
+    # If the user does not select a file, the browser submits an
+    # empty file without a filename.
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        save_path = os.path.join('pdfs', filename)
+        file.save(save_path)
+        return jsonify({'message': 'File uploaded successfully!'})
+    else:
+        return jsonify({'error': 'Invalid file type'}), 400
 
 # Endpoint to perform NER on a selected PDF
 @app.route('/ner', methods=['POST'])
