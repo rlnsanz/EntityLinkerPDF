@@ -55,7 +55,7 @@ def upload_pdf():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        save_path = os.path.join(PDF_DIRECTORY, filename)
+        save_path = os.path.join('/',app.config['UPLOAD_FOLDER'], filename)
         file.save(save_path)
         return jsonify({'message': 'File uploaded successfully!'})
     else:
