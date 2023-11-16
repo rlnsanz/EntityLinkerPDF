@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory
+from werkzeug.utils import secure_filename
 import os
 
 # Import other necessary modules and functions
@@ -15,6 +16,10 @@ app.config['ALLOWED_EXTENSIONS'] = {'pdf'}
 app.config['DEBUG'] = True  # Set to False in production
 
 PDF_DIRECTORY = '../pdfs'  # Adjust the path as per your project structure
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 @app.route('/api/pdf-list', methods=['GET'])
 def list_pdfs():
