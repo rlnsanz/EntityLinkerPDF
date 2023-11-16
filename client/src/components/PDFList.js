@@ -32,8 +32,8 @@ function PDFList({ onSelect }) {
       ) : (
         <ul>
           {pdfFiles.map(pdf => (
-            <li key={pdf.name} onClick={() => onSelect(pdf)}>
-              {pdf.name}
+            <li key={pdf} onClick={() => onSelect(pdf)}>
+              {pdf}
             </li>
           ))}
         </ul>
