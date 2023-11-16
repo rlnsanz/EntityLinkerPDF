@@ -7,6 +7,10 @@ function PDFList({ onSelect }) {
 
   // Fetch PDF files from the server
   useEffect(() => {
+    fetchPdfList();
+  }, []);
+
+  const fetchPdfList = () => {
     setIsLoading(true);
     fetch('/api/pdf-list')
       .then(response => response.json())
@@ -19,12 +23,36 @@ function PDFList({ onSelect }) {
         setError(error);
         setIsLoading(false);
       });
-  }, []);
+  };
 
-  // Render PDF list
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('pdf', file);
+
+      fetch('/api/upload-pdf', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(response => {
+          if (response.ok) {
+            fetchPdfList(); // Refresh the list after upload
+          } else {
+            setError('Error uploading file');
+          }
+        })
+        .catch(error => {
+          console.error('Error uploading file:', error);
+          setError(error);
+        });
+    }
+  };
+
   return (
     <div className="pdf-list">
       <h2>Available PDFs</h2>
+      <input type="file" onChange={handleFileUpload} accept="application/pdf" />
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -43,4 +71,3 @@ function PDFList({ onSelect }) {
 }
 
 export default PDFList;
-
