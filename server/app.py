@@ -14,6 +14,16 @@ app.config['UPLOAD_FOLDER'] = 'pdfs/'
 app.config['ALLOWED_EXTENSIONS'] = {'pdf'}
 app.config['DEBUG'] = True  # Set to False in production
 
+PDF_DIRECTORY = '../pdfs'  # Adjust the path as per your project structure
+
+@app.route('/api/pdf-list', methods=['GET'])
+def list_pdfs():
+    """
+    Endpoint to list available PDFs in the specified directory.
+    """
+    pdf_files = [f for f in os.listdir(PDF_DIRECTORY) if f.endswith('.pdf')]
+    return jsonify(pdf_files)
+
 # Serve the React App
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

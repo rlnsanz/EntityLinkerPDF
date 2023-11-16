@@ -10,6 +10,7 @@
     "eject": "react-scripts eject"
   },
   "author": "Rolando Garcia",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

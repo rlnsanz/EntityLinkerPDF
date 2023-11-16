@@ -1,5 +1,4 @@
-Flask==2.1.2
+Flask==3.0.0
 spacy==3.4.0
-pdfminer.six==20220524  # If you're extracting text from PDFs
-requests==2.27.1       # If you need to make HTTP requests
+requests==2.31.0       # If you need to make HTTP requests
 PyPDF2==3.0.1
